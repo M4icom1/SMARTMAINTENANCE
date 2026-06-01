@@ -52,6 +52,20 @@ function showSection(id, el) {
 
     document.getElementById('page-title').innerText = id.replace('section-', '').toUpperCase();
     if(id === 'section-analise') setTimeout(initChart, 100);
+
+    // Ocultar o menu no mobile após o clique
+    const sidebar = document.getElementById('sidebar');
+    if(sidebar && window.innerWidth < 768) {
+        sidebar.classList.add('hidden');
+        sidebar.classList.remove('flex');
+    }
+}
+
+// MENU MOBILE (3 PONTINHOS)
+function toggleMobileMenu() {
+    const sidebar = document.getElementById('sidebar');
+    sidebar.classList.toggle('hidden');
+    sidebar.classList.toggle('flex');
 }
 
 // RENDERIZAÇÃO
