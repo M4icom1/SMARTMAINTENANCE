@@ -7,15 +7,7 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
-    <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
-        .sidebar-active { background-color: #2563eb; color: white; }
-        .status-badge { padding: 4px 10px; border-radius: 99px; font-size: 0.7rem; font-weight: 700; text-transform: uppercase; }
-        .status-ok { background-color: #dcfce7; color: #166534; }
-        .status-warning { background-color: #fef9c3; color: #854d0e; }
-        .status-danger { background-color: #fee2e2; color: #991b1b; }
-    </style>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
 
@@ -44,10 +36,10 @@
     </div>
 
     <!-- ESTRUTURA PRINCIPAL (APP) -->
-    <div id="screen-app" class="hidden min-h-screen flex flex-col md:flex-row">
+    <div id="screen-app" class="hidden h-screen w-full flex flex-col md:flex-row overflow-hidden">
         
         <!-- MENU LATERAL -->
-        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col shadow-xl">
+        <aside class="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col shadow-xl shrink-0 overflow-y-auto max-h-64 md:max-h-full md:h-full">
             <div class="p-6 text-white font-bold text-lg flex items-center gap-2 tracking-tight">
                 <i class="fas fa-microchip text-blue-500"></i> SMARTMAINTENANCE
             </div>
@@ -77,7 +69,7 @@
         </aside>
 
         <!-- CONTEÚDO PRINCIPAL -->
-        <main class="flex-1 h-screen overflow-y-auto">
+        <main class="flex-1 h-full overflow-y-auto">
             <header class="bg-white border-b p-4 flex justify-between items-center px-8 sticky top-0 z-10 shadow-sm">
                 <h2 id="page-title" class="text-xl font-bold text-slate-700 uppercase tracking-widest">Dashboard</h2>
                 <div class="flex items-center gap-4">
@@ -93,7 +85,7 @@
                 
                 <!-- DASHBOARD -->
                 <div class="content-section" id="section-dash">
-                    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
                             <p class="text-slate-500 text-[10px] font-bold uppercase tracking-widest">Equipamentos</p><h3 class="text-3xl font-black" id="dash-equip-count">06</h3>
                         </div>
@@ -112,22 +104,22 @@
                             <h3 class="font-bold text-lg mb-4 flex items-center gap-2"><i class="fas fa-exclamation-triangle text-yellow-500"></i> Notificações de Ativos</h3>
                             <div class="space-y-4">
                                 <div class="flex items-center justify-between p-4 bg-slate-50 rounded-lg border">
-                                    <div><p class="font-bold">Compressor Principal</p><p class="text-sm text-slate-500 italic">Preditiva identificou vibração nível 2</p></div>
+                                    <div class="mr-2"><p class="font-bold">Compressor Principal</p><p class="text-sm text-slate-500 italic">Preditiva identificou vibração nível 2</p></div>
                                     <span class="status-badge status-warning">Preditiva</span>
                                 </div>
                                 <div class="flex items-center justify-between p-4 bg-red-50 rounded-lg border border-red-100">
-                                    <div><p class="font-bold text-red-700 text-sm">Caldeira Vapor A1</p><p class="text-xs text-red-500 font-bold uppercase">Manutenção Atrasada</p></div>
+                                    <div class="mr-2"><p class="font-bold text-red-700 text-sm">Caldeira Vapor A1</p><p class="text-xs text-red-500 font-bold uppercase">Manutenção Atrasada</p></div>
                                     <span class="status-badge status-danger">Crítico</span>
                                 </div>
                             </div>
                         </div>
                         <div class="bg-white rounded-xl shadow-sm p-6 border">
                             <h3 class="font-bold text-lg mb-4 text-slate-800 tracking-tight text-center">Atalhos de Operação</h3>
-                            <div class="grid grid-cols-2 gap-4 mt-4">
-                                <button onclick="showSection('section-cadastro-equip')" class="bg-blue-600 text-white p-4 rounded-xl font-bold hover:bg-blue-700 transition flex flex-col items-center gap-2 shadow-lg shadow-blue-100">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+                                <button onclick="showSection('section-cadastro-equip')" class="bg-blue-600 text-white p-4 rounded-xl font-bold hover:bg-blue-700 transition flex flex-col items-center justify-center gap-2 shadow-lg shadow-blue-100 text-center">
                                     <i class="fas fa-plus-circle text-2xl"></i> Novo Ativo
                                 </button>
-                                <button onclick="showSection('section-nova-manutencao')" class="bg-slate-800 text-white p-4 rounded-xl font-bold hover:bg-slate-700 transition flex flex-col items-center gap-2">
+                                <button onclick="showSection('section-nova-manutencao')" class="bg-slate-800 text-white p-4 rounded-xl font-bold hover:bg-slate-700 transition flex flex-col items-center justify-center gap-2 text-center">
                                     <i class="fas fa-tools text-2xl"></i> Registrar Maint
                                 </button>
                             </div>
@@ -137,11 +129,11 @@
 
                 <!-- LISTA EQUIPAMENTOS -->
                 <div class="content-section hidden" id="section-equipamentos">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-2xl font-bold">Gestão de Ativos Industriais</h3>
-                        <button onclick="showSection('section-cadastro-equip')" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold shadow-lg">Novo Maquinário</button>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h3 class="text-xl sm:text-2xl font-bold">Gestão de Ativos Industriais</h3>
+                        <button onclick="showSection('section-cadastro-equip')" class="bg-blue-600 text-white px-6 py-2 rounded-xl font-bold shadow-lg w-full sm:w-auto">Novo Maquinário</button>
                     </div>
-                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-sm border overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-slate-50 border-b font-bold text-slate-600 text-sm uppercase">
                                 <tr><th class="p-4">Equipamento</th><th class="p-4">Patrimônio</th><th class="p-4">Localização</th><th class="p-4">Situação</th></tr>
@@ -157,7 +149,7 @@
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 text-blue-600 uppercase">Novo Registro de Máquina</h3>
                         <form onsubmit="salvarEquipamento(event)" class="space-y-4">
                             <div><label class="block text-sm font-bold mb-1 text-slate-700">Nome do Equipamento</label><input type="text" id="e-nome" class="w-full p-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="Ex: CNC Router X2" required></div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Código de Controle</label><input type="text" id="e-codigo" class="w-full p-2 border rounded-lg outline-none focus:ring-2 focus:ring-blue-500" placeholder="MAQ-001" required></div>
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Setor / Linha</label><select id="e-setor" class="w-full p-2 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-blue-500"><option>Produção</option><option>Utilidades</option><option>Expedição</option><option>TI / Elétrica</option></select></div>
                             </div>
@@ -168,11 +160,11 @@
 
                 <!-- AGENDA DE MANUTENÇÕES -->
                 <div class="content-section hidden" id="section-manutencoes">
-                    <div class="flex justify-between items-center mb-6">
-                        <h3 class="text-2xl font-bold">Cronograma de Atividades</h3>
-                        <button onclick="showSection('section-nova-manutencao')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">Nova Ordem de Serviço</button>
+                    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
+                        <h3 class="text-xl sm:text-2xl font-bold">Cronograma de Atividades</h3>
+                        <button onclick="showSection('section-nova-manutencao')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold w-full sm:w-auto">Nova Ordem de Serviço</button>
                     </div>
-                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-sm border overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-slate-50 border-b font-bold text-slate-600 text-sm">
                                 <tr><th class="p-4">Maquinário</th><th class="p-4">Data Planejada</th><th class="p-4">Tipo de OS</th><th class="p-4">Técnico Resp.</th></tr>
@@ -188,7 +180,7 @@
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 text-slate-800">Lançamento de Ordem de Serviço</h3>
                         <form onsubmit="salvarManutencao(event)" class="space-y-4">
                             <div><label class="block text-sm font-bold mb-1 text-slate-700">Selecionar Ativo</label><select id="m-equip" class="w-full p-2 border rounded-lg bg-white outline-none focus:ring-2 focus:ring-blue-500"></select></div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Data de Execução</label><input type="date" id="m-data" class="w-full p-2 border rounded-lg focus:ring-2 focus:ring-blue-500" required></div>
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Tipo de Maint.</label><select id="m-tipo" class="w-full p-2 border rounded-lg bg-white"><option>Preventiva</option><option>Corretiva</option><option>Preditiva</option></select></div>
                             </div>
@@ -208,8 +200,8 @@
                                     <option value="todos">-- Todos os Equipamentos --</option>
                                 </select>
                             </div>
-                            <div><label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Data Início</label><input type="date" id="f-inicio" onchange="updateChart()" class="p-2 border rounded-lg text-sm font-bold text-slate-600"></div>
-                            <div><label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Data Fim</label><input type="date" id="f-fim" onchange="updateChart()" class="p-2 border rounded-lg text-sm font-bold text-slate-600"></div>
+                            <div class="w-full sm:w-auto"><label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Data Início</label><input type="date" id="f-inicio" onchange="updateChart()" class="w-full p-2 border rounded-lg text-sm font-bold text-slate-600"></div>
+                            <div class="w-full sm:w-auto"><label class="block text-[10px] font-bold text-slate-400 uppercase mb-1">Data Fim</label><input type="date" id="f-fim" onchange="updateChart()" class="w-full p-2 border rounded-lg text-sm font-bold text-slate-600"></div>
                         </div>
                         <div style="height: 400px;"><canvas id="eficaciaChart"></canvas></div>
                     </div>
@@ -217,11 +209,11 @@
 
                 <!-- USUÁRIOS (COM LIXEIRA) -->
                 <div class="content-section hidden" id="section-usuarios">
-                    <div class="flex justify-between mb-6 items-center">
-                        <h3 class="text-2xl font-bold text-slate-800">Controle de Usuários</h3>
-                        <button onclick="showSection('section-cadastro-usuario')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold">Novo Usuário</button>
+                    <div class="flex flex-col sm:flex-row justify-between mb-6 items-start sm:items-center gap-4">
+                        <h3 class="text-xl sm:text-2xl font-bold text-slate-800">Controle de Usuários</h3>
+                        <button onclick="showSection('section-cadastro-usuario')" class="bg-blue-600 text-white px-4 py-2 rounded-lg font-bold w-full sm:w-auto">Novo Usuário</button>
                     </div>
-                    <div class="bg-white rounded-xl shadow-sm border overflow-hidden">
+                    <div class="bg-white rounded-xl shadow-sm border overflow-x-auto">
                         <table class="w-full text-left">
                             <thead class="bg-slate-50 border-b font-bold text-slate-600 text-sm">
                                 <tr><th class="p-4">Nome</th><th class="p-4">E-mail</th><th class="p-4">Perfil</th><th class="p-4 text-center">Ação</th></tr>
@@ -238,7 +230,7 @@
                         <form onsubmit="salvarNovoUsuario(event)" class="space-y-4">
                             <div><label class="block text-sm font-bold mb-1 text-slate-700">Nome Completo</label><input type="text" id="u-nome" class="w-full p-2 border rounded-lg" required></div>
                             <div><label class="block text-sm font-bold mb-1 text-slate-700">E-mail</label><input type="email" id="u-email" class="w-full p-2 border rounded-lg" required></div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Perfil</label><select id="u-perfil" class="w-full p-2 border rounded-lg bg-white"><option>Administrador</option><option>Técnico</option></select></div>
                                 <div><label class="block text-sm font-bold mb-1 text-slate-700">Senha Inicial</label><input type="password" id="u-senha" class="w-full p-2 border rounded-lg" required></div>
                             </div>
@@ -253,7 +245,7 @@
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 uppercase text-slate-400 text-sm tracking-widest">Painel Administrativo da Unidade</h3>
                         <form onsubmit="event.preventDefault(); alert('Configurações salvas!')" class="space-y-5">
                             <div><label class="block text-[10px] font-bold text-slate-700 uppercase tracking-widest mb-1">Razão Social</label><input type="text" class="w-full p-3 border rounded-xl outline-none" value="Indústria Smart Maintenance S.A."></div>
-                            <div class="grid grid-cols-2 gap-4">
+                            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                 <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">CNPJ</label><input type="text" class="w-full p-3 border rounded-xl" value="12.345.678/0001-90"></div>
                                 <div><label class="block text-[10px] font-bold text-slate-700 uppercase mb-1">Cidade / UF</label><input type="text" class="w-full p-3 border rounded-xl" value="São Paulo / SP"></div>
                             </div>
@@ -266,138 +258,7 @@
         </main>
     </div>
 
-    <!-- SCRIPTS -->
-    <script>
-        // BANCO DE DADOS EM MEMÓRIA
-        let dbEquips = [
-            { nome: 'Compressor Principal', codigo: 'COMP-01', setor: 'Utilidades' },
-            { nome: 'Gerador Diesel B2', codigo: 'GEN-02', setor: 'Energia' },
-            { nome: 'Torno CNC Router', codigo: 'CNC-10', setor: 'Produção' },
-            { nome: 'Ponte Rolante 10T', codigo: 'PR-05', setor: 'Logística' },
-            { nome: 'Caldeira Vapor A1', codigo: 'CAL-01', setor: 'Utilidades' },
-            { nome: 'Bomba de Recalque', codigo: 'BMB-03', setor: 'Utilidades' }
-        ];
-        let dbMaints = [
-            { equip: 'Compressor Principal', data: '10/06/2026', tipo: 'Preditiva', resp: 'Eng. Roberto' },
-            { equip: 'Caldeira Vapor A1', data: '15/06/2026', tipo: 'Preventiva', resp: 'Tec. Márcio' }
-        ];
-        let dbUsers = [
-            { nome: 'Administrador Geral', email: 'admin@gmail.com', perfil: 'Administrador' }
-        ];
-
-        const mesesLabel = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
-
-        // VALIDAÇÃO DE LOGIN
-        function validarLogin(e) {
-            e.preventDefault();
-            const email = document.getElementById('login-email').value;
-            const pass = document.getElementById('login-senha').value;
-
-            if (email === "admin@gmail.com" && pass === "admin") {
-                showScreen('screen-app');
-            } else {
-                alert("Acesso Negado! Verifique e-mail e senha.");
-            }
-        }
-
-        function logout() {
-            document.getElementById('login-email').value = "";
-            document.getElementById('login-senha').value = "";
-            showScreen('screen-login');
-        }
-
-        // NAVEGAÇÃO
-        function showScreen(id) {
-            document.querySelectorAll('[id^="screen-"]').forEach(s => s.classList.add('hidden'));
-            document.getElementById(id).classList.remove('hidden');
-            if(id === 'screen-app') renderAll();
-        }
-
-        function showSection(id, el) {
-            document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-            document.querySelectorAll('.sidebar-item').forEach(i => i.classList.remove('sidebar-active'));
-            document.getElementById(id).classList.remove('hidden');
-            if(el) el.classList.add('sidebar-active');
-            else if(id.includes('usuario')) document.getElementById('nav-usuarios').classList.add('sidebar-active');
-
-            document.getElementById('page-title').innerText = id.replace('section-', '').toUpperCase();
-            if(id === 'section-analise') setTimeout(initChart, 100);
-        }
-
-        // RENDERIZAÇÃO
-        function renderAll() {
-            document.getElementById('lista-equipamentos').innerHTML = dbEquips.map(e => `<tr><td class="p-4 font-bold">${e.nome}</td><td class="p-4 text-slate-500">${e.codigo}</td><td class="p-4">${e.setor}</td><td class="p-4"><span class="status-badge status-ok">Operando</span></td></tr>`).join('');
-            
-            const options = dbEquips.map(e => `<option value="${e.nome}">${e.nome}</option>`).join('');
-            document.getElementById('m-equip').innerHTML = options;
-            document.getElementById('f-equip').innerHTML = `<option value="todos">-- Todos os Ativos --</option>` + options;
-
-            document.getElementById('lista-manutencoes').innerHTML = dbMaints.map(m => `<tr><td class="p-4 font-bold text-slate-700">${m.equip}</td><td class="p-4 font-bold">${m.data}</td><td class="p-4"><span class="font-bold ${m.tipo === 'Corretiva' ? 'text-red-600' : 'text-blue-600'}">${m.tipo}</span></td><td class="p-4">${m.resp}</td></tr>`).join('');
-
-            document.getElementById('lista-usuarios').innerHTML = dbUsers.map((u, i) => `
-                <tr><td class="p-4 font-bold">${u.nome}</td><td class="p-4">${u.email}</td><td class="p-4 font-bold text-blue-600 text-xs">${u.perfil}</td>
-                <td class="p-4 text-center"><button onclick="excluirUser(${i})" class="text-red-400 hover:text-red-700"><i class="fas fa-trash-alt"></i></button></td></tr>
-            `).join('');
-
-            document.getElementById('dash-equip-count').innerText = String(dbEquips.length).padStart(2, '0');
-            document.getElementById('dash-maint-count').innerText = String(dbMaints.length).padStart(2, '0');
-        }
-
-        // CRUD
-        function salvarEquipamento(e) { e.preventDefault(); dbEquips.push({ nome: document.getElementById('e-nome').value, codigo: document.getElementById('e-codigo').value, setor: document.getElementById('e-setor').value }); renderAll(); showSection('section-equipamentos'); e.target.reset(); }
-        function salvarManutencao(e) { e.preventDefault(); dbMaints.push({ equip: document.getElementById('m-equip').value, data: document.getElementById('m-data').value.split('-').reverse().join('/'), tipo: document.getElementById('m-tipo').value, resp: document.getElementById('m-resp').value }); renderAll(); showSection('section-manutencoes'); e.target.reset(); }
-        function salvarNovoUsuario(e) { e.preventDefault(); dbUsers.push({ nome: document.getElementById('u-nome').value, email: document.getElementById('u-email').value, perfil: document.getElementById('u-perfil').value }); renderAll(); showSection('section-usuarios'); e.target.reset(); }
-        function excluirUser(i) { if(confirm("Deseja deletar este usuário?")) { dbUsers.splice(i, 1); renderAll(); } }
-
-        // CHART DINÂMICO
-        let chart = null;
-        function initChart() {
-            const ctx = document.getElementById('eficaciaChart').getContext('2d');
-            if(chart) chart.destroy();
-            chart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    labels: ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'],
-                    datasets: [
-                        { label: 'Preventiva', data: [20, 25, 30, 35, 32, 40], borderColor: '#2563eb', tension: 0.3, fill: false },
-                        { label: 'Preditiva', data: [5, 10, 15, 20, 25, 30], borderColor: '#059669', tension: 0.3, fill: false },
-                        { label: 'Corretiva', data: [30, 20, 15, 8, 10, 4], borderColor: '#dc2626', tension: 0.3, fill: false }
-                    ]
-                },
-                options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { position: 'bottom' } } }
-            });
-        }
-
-        function updateChart() {
-            if(!chart) return;
-
-            const start = document.getElementById('f-inicio').value;
-            const end = document.getElementById('f-fim').value;
-            const equip = document.getElementById('f-equip').value;
-
-            // Lógica de Eixo X Dinâmico
-            if (start && end) {
-                const sDate = new Date(start);
-                const eDate = new Date(end);
-                let newLabels = [];
-                let tempDate = new Date(sDate);
-
-                while (tempDate <= eDate && newLabels.length < 12) {
-                    newLabels.push(mesesLabel[tempDate.getMonth()]);
-                    tempDate.setMonth(tempDate.getMonth() + 1);
-                }
-                chart.data.labels = newLabels;
-            } else {
-                chart.data.labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
-            }
-
-            // Simulação de Dados
-            const factor = equip === 'todos' ? 1 : 0.4;
-            chart.data.datasets.forEach(d => {
-                d.data = chart.data.labels.map(() => Math.floor(Math.random() * 30 * factor) + 5);
-            });
-            chart.update();
-        }
-    </script>
+    <!-- IMPORT DO SCRIPT EXTERNO -->
+    <script src="app.js"></script>
 </body>
 </html>
