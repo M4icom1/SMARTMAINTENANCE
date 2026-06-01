@@ -1,4 +1,4 @@
-// BANCO DE DADOS EM MEMÓRIA
+// Estado inicial em memória (Mock DB)
 let dbEquips = [
     { nome: 'Compressor Principal', codigo: 'COMP-01', setor: 'Utilidades' },
     { nome: 'Gerador Diesel B2', codigo: 'GEN-02', setor: 'Energia' },
@@ -17,7 +17,7 @@ let dbUsers = [
 
 const mesesLabel = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
 
-// VALIDAÇÃO DE LOGIN
+// Autenticação
 function validarLogin(e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value;
@@ -36,7 +36,7 @@ function logout() {
     showScreen('screen-login');
 }
 
-// NAVEGAÇÃO
+// Controle de Interface e Navegação
 function showScreen(id) {
     document.querySelectorAll('[id^="screen-"]').forEach(s => s.classList.add('hidden'));
     document.getElementById(id).classList.remove('hidden');
@@ -53,7 +53,7 @@ function showSection(id, el) {
     document.getElementById('page-title').innerText = id.replace('section-', '').toUpperCase();
     if(id === 'section-analise') setTimeout(initChart, 100);
 
-    // Ocultar o menu no mobile após o clique
+    // Autoclose do menu mobile ao selecionar uma opção de navegação
     const sidebar = document.getElementById('sidebar');
     if(sidebar && window.innerWidth < 768) {
         sidebar.classList.add('hidden');
@@ -61,14 +61,14 @@ function showSection(id, el) {
     }
 }
 
-// MENU MOBILE (3 PONTINHOS)
+// Alternância de visibilidade do menu em dispositivos móveis
 function toggleMobileMenu() {
     const sidebar = document.getElementById('sidebar');
     sidebar.classList.toggle('hidden');
     sidebar.classList.toggle('flex');
 }
 
-// RENDERIZAÇÃO
+// Atualização de dados no DOM (Renderização)
 function renderAll() {
     document.getElementById('lista-equipamentos').innerHTML = dbEquips.map(e => `<tr><td class="p-4 font-bold">${e.nome}</td><td class="p-4 text-slate-500">${e.codigo}</td><td class="p-4">${e.setor}</td><td class="p-4"><span class="status-badge status-ok">Operando</span></td></tr>`).join('');
     
@@ -87,13 +87,13 @@ function renderAll() {
     document.getElementById('dash-maint-count').innerText = String(dbMaints.length).padStart(2, '0');
 }
 
-// CRUD
+// Operações CRUD (Create, Read, Update, Delete)
 function salvarEquipamento(e) { e.preventDefault(); dbEquips.push({ nome: document.getElementById('e-nome').value, codigo: document.getElementById('e-codigo').value, setor: document.getElementById('e-setor').value }); renderAll(); showSection('section-equipamentos'); e.target.reset(); }
 function salvarManutencao(e) { e.preventDefault(); dbMaints.push({ equip: document.getElementById('m-equip').value, data: document.getElementById('m-data').value.split('-').reverse().join('/'), tipo: document.getElementById('m-tipo').value, resp: document.getElementById('m-resp').value }); renderAll(); showSection('section-manutencoes'); e.target.reset(); }
 function salvarNovoUsuario(e) { e.preventDefault(); dbUsers.push({ nome: document.getElementById('u-nome').value, email: document.getElementById('u-email').value, perfil: document.getElementById('u-perfil').value }); renderAll(); showSection('section-usuarios'); e.target.reset(); }
 function excluirUser(i) { if(confirm("Deseja deletar este usuário?")) { dbUsers.splice(i, 1); renderAll(); } }
 
-// CHART DINÂMICO
+// Configuração e Atualização de Gráficos (Chart.js)
 let chart = null;
 function initChart() {
     const ctx = document.getElementById('eficaciaChart').getContext('2d');
@@ -119,7 +119,7 @@ function updateChart() {
     const end = document.getElementById('f-fim').value;
     const equip = document.getElementById('f-equip').value;
 
-    // Lógica de Eixo X Dinâmico
+    // Ajuste dinâmico do eixo X baseado no range de datas selecionado
     if (start && end) {
         const sDate = new Date(start);
         const eDate = new Date(end);
@@ -135,7 +135,7 @@ function updateChart() {
         chart.data.labels = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun'];
     }
 
-    // Simulação de Dados
+    // Geração de dados mockados para o gráfico baseada no equipamento filtrado
     const factor = equip === 'todos' ? 1 : 0.4;
     chart.data.datasets.forEach(d => {
         d.data = chart.data.labels.map(() => Math.floor(Math.random() * 30 * factor) + 5);

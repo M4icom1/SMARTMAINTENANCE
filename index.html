@@ -11,7 +11,7 @@
 </head>
 <body>
 
-    <!-- TELA 1: LOGIN COM VALIDAÇÃO -->
+    <!-- Tela de Login -->
     <div id="screen-login" class="min-h-screen flex items-center justify-center bg-slate-900 px-4">
         <div class="bg-white p-8 rounded-2xl shadow-2xl w-full max-w-md">
             <div class="text-center mb-8">
@@ -35,10 +35,10 @@
         </div>
     </div>
 
-    <!-- ESTRUTURA PRINCIPAL (APP) -->
+    <!-- Estrutura Principal -->
     <div id="screen-app" class="hidden h-screen w-full flex flex-col md:flex-row overflow-hidden relative">
         
-        <!-- MENU LATERAL -->
+        <!-- Sidebar Lateral -->
         <aside id="sidebar" class="hidden md:flex absolute md:relative z-50 w-full md:w-64 bg-slate-900 text-slate-300 flex-col shadow-xl shrink-0 overflow-y-auto h-full">
             <div class="p-6 text-white font-bold text-lg flex items-center justify-between tracking-tight">
                 <div class="flex items-center gap-2">
@@ -71,7 +71,7 @@
             </div>
         </aside>
 
-        <!-- CONTEÚDO PRINCIPAL -->
+        <!-- Conteúdo Principal -->
         <main class="flex-1 h-full overflow-y-auto">
             <header class="bg-white border-b p-4 flex justify-between items-center px-4 md:px-8 sticky top-0 z-10 shadow-sm">
                 <div class="flex items-center gap-4">
@@ -89,7 +89,7 @@
 
             <div class="p-8">
                 
-                <!-- DASHBOARD -->
+                <!-- Seção: Dashboard -->
                 <div class="content-section" id="section-dash">
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
                         <div class="bg-white p-6 rounded-xl shadow-sm border-l-4 border-blue-500">
@@ -133,7 +133,7 @@
                     </div>
                 </div>
 
-                <!-- LISTA EQUIPAMENTOS -->
+                <!-- Seção: Equipamentos -->
                 <div class="content-section hidden" id="section-equipamentos">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                         <h3 class="text-xl sm:text-2xl font-bold">Gestão de Ativos Industriais</h3>
@@ -149,7 +149,7 @@
                     </div>
                 </div>
 
-                <!-- NOVO EQUIPAMENTO -->
+                <!-- Seção: Cadastro de Equipamento -->
                 <div class="content-section hidden" id="section-cadastro-equip">
                     <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl border shadow-xl">
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 text-blue-600 uppercase">Novo Registro de Máquina</h3>
@@ -164,7 +164,7 @@
                     </div>
                 </div>
 
-                <!-- AGENDA DE MANUTENÇÕES -->
+                <!-- Seção: Manutenções -->
                 <div class="content-section hidden" id="section-manutencoes">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
                         <h3 class="text-xl sm:text-2xl font-bold">Cronograma de Atividades</h3>
@@ -180,7 +180,7 @@
                     </div>
                 </div>
 
-                <!-- NOVA MANUTENÇÃO -->
+                <!-- Seção: Cadastro de Manutenção -->
                 <div class="content-section hidden" id="section-nova-manutencao">
                     <div class="max-w-xl mx-auto bg-white p-8 rounded-xl border shadow-sm">
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 text-slate-800">Lançamento de Ordem de Serviço</h3>
@@ -196,7 +196,7 @@
                     </div>
                 </div>
 
-                <!-- ANÁLISE EFICÁCIA (EIXO X DINÂMICO) -->
+                <!-- Seção: Análise de Eficácia -->
                 <div class="content-section hidden" id="section-analise">
                     <div class="bg-white p-6 rounded-xl border shadow-sm mb-8">
                         <div class="flex flex-wrap gap-4 mb-6 bg-slate-50 p-4 rounded-xl items-end">
@@ -213,7 +213,7 @@
                     </div>
                 </div>
 
-                <!-- USUÁRIOS (COM LIXEIRA) -->
+                <!-- Seção: Usuários -->
                 <div class="content-section hidden" id="section-usuarios">
                     <div class="flex flex-col sm:flex-row justify-between mb-6 items-start sm:items-center gap-4">
                         <h3 class="text-xl sm:text-2xl font-bold text-slate-800">Controle de Usuários</h3>
@@ -229,7 +229,7 @@
                     </div>
                 </div>
 
-                <!-- NOVO USUÁRIO -->
+                <!-- Seção: Cadastro de Usuário -->
                 <div class="content-section hidden" id="section-cadastro-usuario">
                     <div class="max-w-md mx-auto bg-white p-8 rounded-xl border shadow-sm">
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 text-slate-800 text-center">Cadastrar Novo Usuário</h3>
@@ -245,7 +245,7 @@
                     </div>
                 </div>
 
-                <!-- CONFIGURAÇÕES -->
+                <!-- Seção: Configurações -->
                 <div class="content-section hidden" id="section-config">
                     <div class="max-w-2xl mx-auto bg-white p-8 rounded-xl border shadow-sm">
                         <h3 class="text-xl font-bold mb-6 border-b pb-2 uppercase text-slate-400 text-sm tracking-widest">Painel Administrativo da Unidade</h3>
@@ -264,7 +264,7 @@
         </main>
     </div>
 
-    <!-- IMPORT DO SCRIPT EXTERNO -->
+    <!-- Scripts -->
     <script src="app.js"></script>
 </body>
 </html>
